@@ -2,33 +2,38 @@
 Los regalos son cadenas de texto y los materiales son caracteres. Tu tarea es escribir una función que, dada una lista de regalos y los materiales disponibles, devuelva una lista de los regalos que se pueden fabricar.
 
 Un regalo se puede fabricar si contamos con todos los materiales necesarios para fabricarlo.
+Casos:
+gifts = {
+    ['tren', 'oso', 'pelota'],
+    ['juego', 'puzzle']
+}
+materials = {
+    ['tronesa'],
+     ['jlepuz']
+}
 */
 
 function exercise2() {
-
-    // const gifts = ['tren', 'oso', 'pelota']
-    // const materials = 'tronesa'
-    // const gifts = ['juego', 'puzzle']
-    // const materials = 'jlepuz'
     const gifts = ['libro', 'ps5']
-    const materials = 'psli'
+    const materials = 'psl5i'
 
-    const manufacture = (gifts, materials) => {
+    function manufacture(gifts, materials) {
         let result = []
 
-        gifts.forEach(element => {
+        gifts.forEach(gift => {
             let existInMaterials = false
 
-            for (const iterator of element) {
-                existInMaterials = materials.indexOf(iterator) != -1
+            for (const charIterator of gift) {
+                existInMaterials = materials.indexOf(charIterator) != -1
                 if (!existInMaterials) break
             }
             if (existInMaterials)
-                result.push(element)
+                result.push(gift)
         })
 
         return result
     }
+
     console.log(manufacture(gifts, materials))
 }
 
