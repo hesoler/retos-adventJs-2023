@@ -6,7 +6,7 @@ En otras palabras, si hay más de un número repetido, debes devolver el número
 
 function exercise1() {
 
-    const findFirstRepeated = (numbers) => {
+    function findFirstRepeated(numbers) {
         let firstRepeatedValue = -1
         let reverseIndexFirstRepeated = numbers.length
         let reverseNumbers = [...numbers].reverse()
