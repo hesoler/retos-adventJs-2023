@@ -1,21 +1,18 @@
-// Tienes la secuencia original de pasos en la fabricación original y la secuencia modificada modified que puede incluir un paso extra o faltar un paso.
-
-// Tu tarea es escribir una función que identifique y devuelva el primer paso extra que se ha añadido o eliminado en la cadena de fabricación. Si no hay ninguna diferencia entre las secuencias, devuelve una cadena vacía.
 /*
-casos = {
-    ['abcd', 'abcde'],
-    ['stepfor', 'stepor'],
-    ['abcde', 'abcde'],
-    ['abcde', 'abcde'],
-    ['xxxx', 'xxoxx']
-    ['iiiiii', 'iiiii'],
-}
+Tienes la secuencia original de pasos en la fabricación original y la secuencia modificada modified que puede incluir un paso extra o faltar un paso.
+
+Tu tarea es escribir una función que identifique y devuelva el primer paso extra que se ha añadido o eliminado en la cadena de fabricación. Si no hay ninguna diferencia entre las secuencias, devuelve una cadena vacía.
+
+    casos               resultado esperado
+'abcd', 'abcde''                'e'
+'stepfor', 'stepor''            'f'
+'abcde', 'abcde'                ''
+'xxxx', 'xxoxx'                 'o'
+'iiiiii', 'iiiii'               'i'
 */
 exercise3()
 
 function exercise3() {
-    const original = 'xxxx'
-    const modified = 'xxoxx'
 
     function findNaughtyStep(original, modified) {
         let arrayFromOriginal = Array.from(original)
@@ -23,7 +20,11 @@ function exercise3() {
 
         if (arrayFromOriginal.length === arrayFromModified.length) {
             return arrayFromOriginal
-                .map(char => arrayFromModified.find(elm => char !== elm))
+                .map((char, index) => {
+                    return arrayFromModified[index] !== char
+                        ? arrayFromModified[index]
+                        : ''
+                })
                 .join('')
         }
 
@@ -49,6 +50,6 @@ function exercise3() {
 
         return result
     }
-    console.log(findNaughtyStep(original, modified))
+
 }
 
