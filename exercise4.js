@@ -1,18 +1,13 @@
 /*
-En el taller de Santa 🎅, algunos mensajes navideños han sido escritos de manera peculiar: las letras dentro de los paréntesis deben ser leídas al revés
-
-Santa necesita que estos mensajes estén correctamente formateados. Tu tarea es escribir una función que tome una cadena de texto y revierta los caracteres dentro de cada par de paréntesis, eliminando los paréntesis en el mensaje final.
+Tu tarea es escribir una función que tome una cadena de texto y revierta los caracteres dentro de cada par de paréntesis, eliminando los paréntesis en el mensaje final.
 
 Eso sí, ten en cuenta que pueden existir paréntesis anidados, por lo que debes invertir los caracteres en el orden correcto.
 
-const a = decode('hola (odnum)')
-console.log(a) // hola mundo
-
-const b = decode('(olleh) (dlrow)!')
-console.log(b) // hello world!
-
-const c = decode('sa(u(cla)atn)s')
-console.log(c) // santaclaus
+Casos de prueba:
+        decode(cadena_de_texto)       resultado esperado
+        decode('hola (odnum)')          'hola mundo'
+        decode('(olleh) (dlrow)!')      'hello world!'
+        decode('sa(u(cla)atn)s')'       'santaclaus'
 
 Paso a paso:
 1. Invertimos el anidado -> sa(ualcatn)s
@@ -25,22 +20,16 @@ En el mensaje final no deben quedar paréntesis.
 El nivel máximo de anidamiento es 2.
 */
 
-exercise4()
+function decode(message) {
+    if (message.lastIndexOf('(') !== -1) {
+        const lastOpeningParenthesis = message.lastIndexOf('(') + 1
+        const firstClosingParenthesis = message.indexOf(')', lastOpeningParenthesis)
 
-function exercise4() {
+        const textFragment = message.slice(lastOpeningParenthesis, firstClosingParenthesis)
+        const reversedText = Array.from(textFragment).reverse().join('')
 
-    function decode(message) {
-        if (message.lastIndexOf('(') !== -1) {
-            const lastOpeningParenthesis = message.lastIndexOf('(') + 1
-            const firstClosingParenthesis = message.indexOf(')', lastOpeningParenthesis)
-
-            const textFragment = message.slice(lastOpeningParenthesis, firstClosingParenthesis)
-            const reversedText = Array.from(textFragment).reverse().join('')
-
-            const result = message.replace(`(${textFragment})`, reversedText)
-            return decode(result)
-        }
-        return message
+        const result = message.replace(`(${textFragment})`, reversedText)
+        return decode(result)
     }
-
+    return message
 }
