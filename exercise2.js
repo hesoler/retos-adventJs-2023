@@ -17,7 +17,7 @@ function manufacture(gifts, materials) {
         let existInMaterials = false
 
         for (const charIterator of gift) {
-            existInMaterials = materials.indexOf(charIterator) != -1
+            existInMaterials = materials.includes(charIterator)
             if (!existInMaterials) break
         }
         if (existInMaterials)
