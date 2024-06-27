@@ -13,38 +13,12 @@ Casos de prueba:
 */
 
 function findNaughtyStep(original, modified) {
-    let arrayFromOriginal = Array.from(original)
-    let arrayFromModified = Array.from(modified)
+    if (original.length === modified.length) return ''
 
-    if (arrayFromOriginal.length === arrayFromModified.length) {
-        return arrayFromOriginal
-            .map((char, index) => {
-                return arrayFromModified[index] !== char
-                    ? arrayFromModified[index]
-                    : ''
-            })
-            .join('')
-    }
-
-    let longestArray = arrayFromModified
-    let shortestArray = arrayFromOriginal
-    let result = ''
-
-    if (arrayFromOriginal.length > arrayFromModified.length) {
-        longestArray = arrayFromOriginal
-        shortestArray = arrayFromModified
-    }
+    let longestArray = original.length > modified.length ? original : modified
 
     for (let i = 0; i < longestArray.length; i++) {
-        if (shortestArray[i]) {
-            if (longestArray[i] !== shortestArray[i]) {
-                result += longestArray[i]
-                longestArray = longestArray.splice(i, 1)
-            }
-        }
-        else
-            return result + longestArray.slice(i).join('')
+      if (original[i] !== modified[i])
+        return longestArray[i]
     }
-
-    return result
-}
+  }

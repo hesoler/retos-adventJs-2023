@@ -10,24 +10,12 @@ Casos de prueba:
         [5, 1, 5, 1]                5
 */
 
-function findFirstRepeated(numbers) {
-    let firstRepeatedValue = -1
-    let reverseIndexFirstRepeated = numbers.length
-    let reverseNumbers = [...numbers].reverse()
-    let reversePosition = 0
+function findFirstRepeated(gifts) {
+    let newNumbers = []
 
-    numbers.forEach(number => {
-        if (reverseNumbers.length > 1) {
-            reverseNumbers.pop()
-
-            reverseIndexFirstRepeated = reverseNumbers.lastIndexOf(number)
-
-            if (reverseIndexFirstRepeated >= reversePosition) {
-                reversePosition = reverseIndexFirstRepeated
-                firstRepeatedValue = number
-            }
-        }
-    })
-
-    return firstRepeatedValue
+    for (const number of gifts) {
+        if (newNumbers.includes(number)) return number
+        newNumbers.push(number)
+    }
+    return -1
 }
