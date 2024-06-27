@@ -34,49 +34,22 @@ El resultado es un array donde cada elemento muestra la carretera en cada unidad
 Ten en cuenta que si el trineo está en la misma posición que una barrera, entonces toma su lugar en el array.
  */
 
-async function cyberReindeer(road, time) {
+function cyberReindeer(road, time) {
+  let result = [road]
+  let nextChar = road[1]
 
-  function startRoad() {
-    return new Promise(resolve => {
-      let pos = 0
-      const timeUnit = time * 1000
-      let barriersTimeLimit = 5
-      let openBarriers = false
-      let roadArray = road.split('')
-      let result = []
-      let stringRoadArray
+  for (let i = 1; i < time; i++) {
+    if (i === 5)
+      road = road.replaceAll('|', '*')
 
-      const intervalId = setInterval(() => {
-        stringRoadArray = roadArray.join('')
-        time++
-
-        if (time >= barriersTimeLimit && !openBarriers) {
-          openBarriers = true
-          stringRoadArray = stringRoadArray.replaceAll('|', '*')
-          roadArray = stringRoadArray.split('')
-        }
-
-        const currentElement = roadArray[pos]
-        const nextElement = roadArray[pos + 1]
-
-        if (!nextElement) {
-          clearInterval(intervalId)
-          resolve(result)
-        }
-        if (nextElement === '|' && !openBarriers) return
-
-        roadArray[pos + 1] = currentElement
-        roadArray[pos] = nextElement
-        pos++
-
-        result.push(stringRoadArray)
-      }, timeUnit)
-
-    })
+    const matches = road.match(/S[*.]/)
+    if (matches) {
+      const replacement = nextChar + matches[0][0]
+      road = road.replace(matches[0], replacement)
+      nextChar = matches[0][1]
+    }
+    result.push(road)
   }
 
-
-  const result = await startRoad()
-  console.log(result);
   return result
 }
