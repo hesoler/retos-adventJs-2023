@@ -28,10 +28,14 @@ Ten en cuenta que no importa si es a la izquierda o la derecha, la distancia es 
 function maxDistance(movements: string): number {
     let distance = 0, bonus = 0
 
-    for (let sign of movements) {
-        if (sign === '<') distance++
-        if (sign === '>') distance--
-        if (sign === '*') bonus++
+    let actions: Record<string, Function> = {
+        '<': () => { distance++ },
+        '>': () => { distance-- },
+        '*': () => { bonus++ },
     }
+
+    for (let sign of movements)
+        actions[sign]()
+
     return Math.abs(distance) + bonus
 }
